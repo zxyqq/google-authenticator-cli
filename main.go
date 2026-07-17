@@ -8,7 +8,7 @@ import (
 	"sort"
 
 	"github.com/chanyipiaomiao/hltool"
-	"gopkg.in/alecthomas/kingpin.v2"
+	"github.com/alecthomas/kingpin/v2"
 )
 
 const (
@@ -86,18 +86,19 @@ func formatPrint(r map[string][]byte)  {
 		if err != nil {
 			continue
 		}
-		n, t, err := hltool.TwoStepAuthGenNumber(totp)
+		n, _, err := hltool.TwoStepAuthGenNumber(totp)
 		if err != nil {
 			continue
 		}
-		fmt.Printf("%-20s %-15s %-5d\n", totp.Name, n, t)
+		//fmt.Printf("%-20s %-15s %-5d\n", totp.Name, n, t)
+		fmt.Printf("%s\n", n)
 	}
 }
 
 // List 列出所有的名称和6位数字
 func (s *Secret) List(name string) error {
-	fmt.Printf("%-20s %-15s %-5s\n", "Name", "Number", "Remaining time")
-	fmt.Printf("%-20s %-15s %-5s\n", "----", "------", "--------------")
+	//fmt.Printf("%-20s %-15s %-5s\n", "Name", "Number", "Remaining time")
+	//fmt.Printf("%-20s %-15s %-5s\n", "----", "------", "--------------")
 
 	if name != "all" {
 		r, err := s.TwoStepDB.Get([]string{name})
